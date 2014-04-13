@@ -70,7 +70,7 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 # GL
 TARGET_USES_C2D_COMPOSITION := true
 USE_OPENGL_RENDERER := true
-BOARD_EGL_CFG := device/sony/c2105/egl.cfg
+BOARD_EGL_CFG := device/sony/taoshan/egl.cfg
 ENABLE_WEBGL := true
 
 # Recovery
