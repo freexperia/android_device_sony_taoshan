@@ -56,7 +56,6 @@ PRODUCT_COPY_FILES += \
 # Init scripts and logo 
 PRODUCT_COPY_FILES += \
     device/sony/taoshan/rootdir/root/init.qcom.rc:root/init.qcom.rc \
-    device/sony/taoshan/rootdir/root/logo.rle:root/logo.rle \
     device/sony/taoshan/rootdir/root/fstab.qcom:root/fstab.qcom \
     device/sony/taoshan/rootdir/root/ueventd.qcom.rc:root/ueventd.qcom.rc \
     device/sony/taoshan/rootdir/root/init.qcom.usb.rc:root/init.qcom.usb.rc
