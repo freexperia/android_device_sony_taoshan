@@ -18,6 +18,8 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
+$(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
+
 # Inherit Sony common (and qcom-common) files.
 $(call inherit-product, device/sony/common/resources.mk)
 $(call inherit-product, device/sony/qcom-common/qcom-common.mk)
@@ -41,7 +43,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
     frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml 
 	
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
@@ -92,7 +94,7 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8960 \
     gralloc.msm8960 \
     copybit.msm8960 \
-	libqdMetaData \
+    libqdMetaData \
     memtrack.msm8960
 	
 PRODUCT_COPY_FILES += \
@@ -103,7 +105,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.bt.hci_transport=smd
 	
 PRODUCT_PROPERTY_OVERRIDES += \	
-	 persist.sys.strictmode.visual=0 \
+     persist.sys.strictmode.visual=0 \
      persist.sys.strictmode.disable=1
 	
 # BT
@@ -134,7 +136,7 @@ PRODUCT_PACKAGES += \
 	
 # Filesystem management tools
 PRODUCT_PACKAGES += \
-	setup_fs \
+    setup_fs \
     e2fsck
 
 # RIL	
