@@ -12,17 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv7-a-neon
+# camera is enabled
+USE_CAMERA_STUB := false
+
+# inherit from Sony common
+include device/sony/common/BoardConfigCommon.mk
+
+# inherit from qcom-common
+include device/sony/qcom-common/BoardConfigCommon.mk
+
 # the two variables below have impact on loading .so from /system/lib/hw/
 # see hardware/libhardware/modules/README.android
 # and first one has impact on the fast boot flashing process so it is removed
 #TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 TARGET_BOARD_PLATFORM := msm8960
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := krait
-TARGET_CPU_SMP := true
 
 TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
@@ -40,7 +44,7 @@ TARGET_KERNEL_SOURCE := kernel/sony/taoshan
 TARGET_KERNEL_CONFIG := cm_taoshan_defconfig
 
 # QCOM/CAF hardware
-BOARD_USES_QCOM_HARDWARE := true
+BOARD_USES_QCOM_HARDWARE := true 
 TARGET_QCOM_AUDIO_VARIANT := caf
 TARGET_QCOM_DISPLAY_VARIANT := caf
 TARGET_QCOM_MEDIA_VARIANT := caf
@@ -51,9 +55,10 @@ TARGET_DISPLAY_USE_RETIRE_FENCE := true
 # Time
 BOARD_USES_QC_TIME_SERVICES := true
 
-# Av enhancements
+# Enable AV enhacements
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 
+# kernel
 BOARD_KERNEL_BASE := 0x80200000
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000
 # the androidboot.hardware has impact on loading .rc files
@@ -70,10 +75,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 1711276032
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 
 # GL
-TARGET_USES_C2D_COMPOSITION := true
-USE_OPENGL_RENDERER := true
 BOARD_EGL_CFG := device/sony/c2105/egl.cfg
-ENABLE_WEBGL := true
 
 # Recovery
 BOARD_CUSTOM_GRAPHICS := ../../../device/sony/taoshan/recovery/graphics/graphics.c
@@ -85,16 +87,10 @@ BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_ALSA_AUDIO := true
 USE_PROPRIETARY_AUDIO_EXTENSIONS := false
 
-# video is enabled
-TARGET_USES_ION := true
-
 # Bluetooth
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BLUETOOTH_HCI_USE_MCT := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/sony/taoshan/bluetooth
-
-# camera is enabled
-USE_CAMERA_STUB := false
 
 # wlan is enabled
 BOARD_HAS_QCOM_WLAN := true
