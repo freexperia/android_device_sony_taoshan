@@ -40,7 +40,6 @@ TARGET_KERNEL_SOURCE := kernel/sony/taoshan
 TARGET_KERNEL_CONFIG := cm_taoshan_defconfig
 
 # QCOM/CAF hardware
-COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_QCOM_AUDIO_VARIANT := caf
 TARGET_QCOM_DISPLAY_VARIANT := caf
@@ -51,6 +50,9 @@ TARGET_DISPLAY_USE_RETIRE_FENCE := true
 
 # Time
 BOARD_USES_QC_TIME_SERVICES := true
+
+# Av enhancements
+TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 
 BOARD_KERNEL_BASE := 0x80200000
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000
@@ -135,5 +137,4 @@ BOARD_SEPOLICY_UNION += \
     system.te \
     ueventd.te \
     wpa_supplicant.te
-
 
