@@ -64,7 +64,6 @@ TARGET_QCOM_MEDIA_VARIANT := caf
 TARGET_USES_QCOM_BSP := true
 COMMON_GLOBAL_CFLAGS += -DQCOM_BSP
 
-TARGET_SPECIFIC_HEADER_PATH += device/sony/taoshan/include
 
 BOARD_USES_ALSA_AUDIO := true
 BOARD_USES_LEGACY_ALSA_AUDIO := true
@@ -94,16 +93,12 @@ BLUETOOTH_HCI_USE_MCT := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/sony/taoshan/bluetooth
 
 TARGET_RECOVERY_FSTAB = device/sony/taoshan/rootdir/root/fstab.qcom
+BOARD_RECOVERY_SWIPE := false
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 BOARD_CUSTOM_BOOTIMG_MK := device/sony/taoshan/custombootimg.mk
 BOARD_CUSTOM_GRAPHICS := ../../../device/sony/taoshan/recovery/graphics/graphics.c
-
-TARGET_NO_RPC := true
-TARGET_PROVIDES_GPS_LOC_API := true
-BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
-BOARD_HAVE_NEW_QC_GPS := true
 
 BOARD_USES_QC_TIME_SERVICES := true
 
