@@ -107,6 +107,8 @@ BOARD_USES_QC_TIME_SERVICES := true
 
 TARGET_POWERHAL_NO_TOUCH_BOOST := true
 
+TARGET_POWERHAL_VARIANT := qcom
+
 BOARD_HARDWARE_CLASS := device/sony/taoshan/cmhw
 
 # TWRP configs

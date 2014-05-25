@@ -12,3 +12,4 @@
 /dev/block/platform/msm_sdcc.1/by-name/cache          /cache       ext4    noatime,nosuid,nodev,barrier=1,data=ordered    wait,check
 /devices/platform/msm_sdcc.1/mmc_host/mmc0            auto         auto    defaults                                       voldmanaged=sdcard0:32,nonremovable,noemulatedsd
 /devices/platform/msm_sdcc.3/mmc_host                 auto         auto    nosuid,nodev                                   voldmanaged=sdcard1:auto
+/devices/platform/msm_hsusb_host                      auto         auto    defaults                                       voldmanaged=usbdisk:auto
