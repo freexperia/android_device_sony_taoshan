@@ -22,6 +22,9 @@ include device/sony/common/BoardConfigCommon.mk
 # inherit from qcom-common
 include device/sony/qcom-common/BoardConfigCommon.mk
 
+# inherit device headers
+TARGET_SPECIFIC_HEADER_PATH += device/sony/taoshan/include
+
 USE_CAMERA_STUB := false
 
 TARGET_BOARD_PLATFORM := msm8960
@@ -105,6 +108,8 @@ BOARD_CUSTOM_BOOTIMG_MK := device/sony/taoshan/custombootimg.mk
 BOARD_CUSTOM_GRAPHICS := ../../../device/sony/taoshan/recovery/graphics/graphics.c
 
 BOARD_USES_QC_TIME_SERVICES := true
+
+BOARD_HAVE_NEW_QC_GPS := true
 
 TARGET_POWERHAL_NO_TOUCH_BOOST := true
 
