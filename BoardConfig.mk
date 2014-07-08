@@ -1,4 +1,4 @@
-# Copyright 2013 The Android Open Source Project
+# Copyright 2014 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -77,6 +77,11 @@ TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 COMMON_GLOBAL_CFLAGS += -DSONY_CAM_PARAMS
+
+# Vendor Init
+TARGET_UNIFIED_DEVICE := true
+TARGET_INIT_VENDOR_LIB := libinit_msm
+TARGET_LIBINIT_DEFINES_FILE := device/sony/taoshan/init/init_taoshan.c
 
 # Wlan
 BOARD_HAS_QCOM_WLAN              := true

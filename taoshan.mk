@@ -1,4 +1,4 @@
-# Copyright (C) 2013 The Android Open Source Project
+# Copyright (C) 2014 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -155,11 +155,15 @@ PRODUCT_PACKAGES += \
     setup_fs \
     e2fsck
 
+# GPS-1
 PRODUCT_PACKAGES += \
-    gps.msm8960 \
-    gps.conf \
-    sap.conf \
-    izat.conf
+    gps.msm8960
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf \
+    $(LOCAL_PATH)/gps/sap.conf:system/etc/sap.conf \
+    $(LOCAL_PATH)/gps/sec_config:system/etc/sec_config
+
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.transmitpower=true \
@@ -191,16 +195,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.audio.fluencetype=none \
     lpa.decode=true \
     lpa.use-stagefright=true
-	
+
+# GPS-2	
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qmienabled=true \
-    ro.qc.sdk.izat.premium_enabled=1 \
-    ro.qc.sdk.izat.service_mask=0x5 \
-    persist.gps.qc_nlp_in_use=0 \
     ro.gps.agps_provider=1
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
+    ro.secure=1 \
+    ro.allow.mock.location=0 \
+    ro.debuggable=1 \
+    persist.service.adb.enable=1 \
+    persist.service.debuggable=1 
 
 PRODUCT_GMS_CLIENTID_BASE := android-sonyericsson
 

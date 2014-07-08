@@ -1,4 +1,4 @@
-/* Copyright (c) 2014 Code Aurora Forum. All rights reserved.
+/* Copyright (c) 2009,2011 Code Aurora Forum. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -27,40 +27,24 @@
  *
  */
 
-#ifndef LOC_LOG_H
-#define LOC_LOG_H
+#ifndef LOC_ENG_NI_H
+#define LOC_ENG_NI_H
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
+#include <stdbool.h>
 
-#include <ctype.h>
+#define LOC_NI_NO_RESPONSE_TIME            20                      /* secs */
+#define LOC_NI_NOTIF_KEY_ADDRESS           "Address"
 
-typedef struct
-{
-   char                 name[128];
-   long                 val;
-} loc_name_val_s_type;
+typedef struct {
+    pthread_t               thread;            /* NI thread */
+    int                     respTimeLeft;       /* examine time for NI response */
+    bool                    respRecvd;   /* NI User reponse received or not from Java layer*/
+    void*                   rawRequest;
+    int                     reqID;         /* ID to check against response */
+    GpsUserResponseType     resp;
+    pthread_cond_t          tCond;
+    pthread_mutex_t         tLock;
+} loc_eng_ni_data_s_type;
 
-#define NAME_VAL(x) {"" #x "", x }
 
-#define UNKNOWN_STR "UNKNOWN"
-
-#define CHECK_MASK(type, value, mask_var, mask) \
-   ((mask_var & mask) ? (type) value : (type) (-1))
-
-/* Get names from value */
-const char* loc_get_name_from_mask(loc_name_val_s_type table[], int table_size, long mask);
-const char* loc_get_name_from_val(loc_name_val_s_type table[], int table_size, long value);
-const char* loc_get_msg_q_status(int status);
-
-extern const char* log_succ_fail_string(int is_succ);
-
-extern char *loc_get_time(char *time_string, unsigned long buf_size);
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* LOC_LOG_H */
+#endif /* LOC_ENG_NI_H */

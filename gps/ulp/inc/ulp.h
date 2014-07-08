@@ -1,4 +1,4 @@
-/* Copyright (c) 2014 Code Aurora Forum. All rights reserved.
+/* Copyright (c) 2014, Code Aurora Forum. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -27,40 +27,33 @@
  *
  */
 
-#ifndef LOC_LOG_H
-#define LOC_LOG_H
+#ifndef ULP_H
+#define ULP_H
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-#include <ctype.h>
+#include <hardware/gps.h>
+#include "loc_eng.h"
 
-typedef struct
-{
-   char                 name[128];
-   long                 val;
-} loc_name_val_s_type;
+/** Represents the standard ulp module interface. */
+typedef struct {
+    /** set to sizeof(ulpInterface) */
+    size_t   size;
 
-#define NAME_VAL(x) {"" #x "", x }
+    /**
+     * Starts the libulp module. 0: success
+     */
+    int   (*init)(loc_eng_data_s_type &loc_eng_data);
 
-#define UNKNOWN_STR "UNKNOWN"
+}ulpInterface;
 
-#define CHECK_MASK(type, value, mask_var, mask) \
-   ((mask_var & mask) ? (type) value : (type) (-1))
-
-/* Get names from value */
-const char* loc_get_name_from_mask(loc_name_val_s_type table[], int table_size, long mask);
-const char* loc_get_name_from_val(loc_name_val_s_type table[], int table_size, long value);
-const char* loc_get_msg_q_status(int status);
-
-extern const char* log_succ_fail_string(int is_succ);
-
-extern char *loc_get_time(char *time_string, unsigned long buf_size);
+typedef const ulpInterface* (get_ulp_interface) (void);
 
 #ifdef __cplusplus
 }
 #endif
+#endif /* ULP_H */
 
-#endif /* LOC_LOG_H */

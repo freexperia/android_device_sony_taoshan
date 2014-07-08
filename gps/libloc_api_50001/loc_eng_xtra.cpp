@@ -1,4 +1,4 @@
-/* Copyright (c) 2014 Code Aurora Forum. All rights reserved.
+/* Copyright (c) 2009,2011 Code Aurora Forum. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -27,40 +27,64 @@
  *
  */
 
-#ifndef LOC_LOG_H
-#define LOC_LOG_H
+#define LOG_NDDEBUG 0
+#define LOG_TAG "LocSvc_eng"
 
-#ifdef __cplusplus
-extern "C"
+#include <loc_eng.h>
+#include <loc_eng_msg.h>
+#include "log_util.h"
+
+
+/*===========================================================================
+FUNCTION    loc_eng_xtra_init
+
+DESCRIPTION
+   Initialize XTRA module.
+
+DEPENDENCIES
+   N/A
+
+RETURN VALUE
+   0: success
+
+SIDE EFFECTS
+   N/A
+
+===========================================================================*/
+int loc_eng_xtra_init (loc_eng_data_s_type &loc_eng_data,
+                       GpsXtraCallbacks* callbacks)
 {
-#endif
+   loc_eng_xtra_data_s_type *xtra_module_data_ptr;
 
-#include <ctype.h>
+   xtra_module_data_ptr = &loc_eng_data.xtra_module_data;
+   xtra_module_data_ptr->download_request_cb = callbacks->download_request_cb;
 
-typedef struct
-{
-   char                 name[128];
-   long                 val;
-} loc_name_val_s_type;
-
-#define NAME_VAL(x) {"" #x "", x }
-
-#define UNKNOWN_STR "UNKNOWN"
-
-#define CHECK_MASK(type, value, mask_var, mask) \
-   ((mask_var & mask) ? (type) value : (type) (-1))
-
-/* Get names from value */
-const char* loc_get_name_from_mask(loc_name_val_s_type table[], int table_size, long mask);
-const char* loc_get_name_from_val(loc_name_val_s_type table[], int table_size, long value);
-const char* loc_get_msg_q_status(int status);
-
-extern const char* log_succ_fail_string(int is_succ);
-
-extern char *loc_get_time(char *time_string, unsigned long buf_size);
-
-#ifdef __cplusplus
+   return 0;
 }
-#endif
 
-#endif /* LOC_LOG_H */
+/*===========================================================================
+FUNCTION    loc_eng_xtra_inject_data
+
+DESCRIPTION
+   Injects XTRA file into the engine but buffers the data if engine is busy.
+
+DEPENDENCIES
+   N/A
+
+RETURN VALUE
+   0: success
+   >0: failure
+
+SIDE EFFECTS
+   N/A
+
+===========================================================================*/
+int loc_eng_xtra_inject_data(loc_eng_data_s_type &loc_eng_data,
+                             char* data, int length)
+{
+    loc_eng_msg_inject_xtra_data *msg(new loc_eng_msg_inject_xtra_data(&loc_eng_data,
+                                                                       data, length));
+    loc_eng_msg_sender(&loc_eng_data, msg);
+
+    return 0;
+}
